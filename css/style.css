@@ -1,0 +1,46 @@
+body {    
+    background-color: #0782b3;
+    font-family: 'Courier New', Courier, monospace;
+    color: aqua;
+}
+.nav_bar {
+    font-size: 30px;
+    font-weight: bold;
+}
+.container {
+    margin-top: 30px;
+}
+.row {
+}
+.col-8 {
+}
+.col-4 {
+}
+.col-3.nav_logo {
+}
+.col-9 {
+}
+.nav_text {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.img_size {
+}
+.title_photo {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+.my_photo{
+    background: url(../images/1648690771_49-kartinkof-club-p-kartinki-smeshnie-voenkomat-50.jpg) no-repeat center center;
+    background-size: 100%;
+    width: 334px;
+    height: 418px;
+}
+.nav_logo{
+    background: url(../images/803-8030366_hd-wallpapers-aperture-science-logo-vector-aperture-science.png) no-repeat center center;
+    background-size: 100%;
+    width: 60px;
+    height: 60px;
+}
