@@ -1,0 +1,17 @@
+body {    
+    background-color: #0782b3;
+    font-family: 'Courier New', Courier, monospace;
+    color: aqua;
+}
+#RegistrationButton {
+    border: none;
+    border-radius: 15px;
+    width: 150px;
+    height: 50px;
+    background-color: #0a4ad4;
+    color: white;
+    font-weight: bold;
+}
+#RegistrationButton:hover {
+    background-color: darkred; /* Цвет фона при наведении */
+}
