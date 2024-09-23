@@ -9,22 +9,21 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login_style.css">
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Регистрация</h1>
+            <h1 class="hello">Вход</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <form method='POST' action='login.php'>
-                <div class="row form_reg"><input class="form" type="email" name="email" placeholder="Email" required></div>
                 <div class="row form_reg"><input class="form" type="text" name="login" placeholder="Login" required></div>
                 <div class="row form_reg"><input class="form" type="password" name="password" placeholder="Password" required></div>
-                <button type="submit" class="btn_red btn__reg" name="submit">Продолжить</button>
+                <button type="submit" class="btn_red btn__reg" name="submit" id="myButton">Продолжить</button>
             </form>
         </div>
     </div>
@@ -32,27 +31,31 @@
 </body>
 </html>
 <?php
+require_once('db.php');
+
+if (isset($_COOKIE['User'])) {
+    header("Location: profile.php");
+}
+
+$link = mysqli_connect('127.0.0.1', 'root', 'kali', 'test');
 if (isset($_POST['submit'])) {
-    require_once('db.php');
-    $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'test');
 
-    if (!$link) {
-        die('Ошибка подключения к базе данных: ' . mysqli_connect_error());
-    }
+    $username = $_POST['login'];
+    $pass = $_POST['password'];
 
-    $email = mysqli_real_escape_string($link, $_POST['email']);
-    $username = mysqli_real_escape_string($link, $_POST['login']);
-    $password = mysqli_real_escape_string($link, $_POST['password']);
-
-    if (!$email || !$username || !$password) {
+    if (!$username || !$pass) {
         die('Пожалуйста, введите все значения!');
     }
 
-    $sql = "INSERT INTO users (email, username, pass) VALUES ('$email', '$username', '$password')";
+    $sql = "SELECT * FROM users WHERE username='$username' AND pass='$pass'";
 
-    if (!mysqli_query($link, $sql)) {
-        echo "Не удалось добавить пользователя: " . mysqli_error($link);
-    }
-    mysqli_close($link);
+    $result = mysqli_query($link, $sql);
+
+    if (mysqli_num_rows($result) == 1) {
+        setcookie("User", $username, time()+7200);
+        header('Location: profile.php');
+      } else {
+        echo "не правильное имя или пароль";
+      }
 }
 ?>

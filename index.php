@@ -9,14 +9,14 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css” />
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index_style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="button_js col-12">
-                <h1>Авторизуйтесь!</h1>
+                <h1>Посты!</h1>
                 <?php
                     if (!isset($_COOKIE['User'])) {
                     ?>
@@ -24,6 +24,16 @@
                     <?php
                          } else {
                             // подключение к БД
+                            $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'test');
+                            $sql = "SELECT * FROM posts";
+                            $res = mysqli_query($link, $sql);
+                            if (mysqli_num_rows($res) >  0) {
+                                while ($post = mysqli_fetch_array($res)) {
+                                    echo "<a href='/posts.php?id=" . $post["id"] . "'>" . $post['title'] . "</a><br>";
+                                }
+                               } else {
+                                    echo "Записей пока нет";
+                               }
                          }
                     ?>
             </div>

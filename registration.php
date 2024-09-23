@@ -9,13 +9,13 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="css/registration.css">
+    <link rel="stylesheet" href="css/registration_style.css">
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Регистрация</h1>
+            <h1 class="hello">Регистрация</h1>
         </div>
     </div>
     <div class="row">
@@ -25,7 +25,7 @@
                 <div class="row form_reg"><input class="form" type="text" name="login" placeholder="Login" required></div>
                 <div class="row form_reg"><input class="form" type="password" name="password" placeholder="Password" required></div>
                 <!-- <button type="submit" class="btn_red btn__reg" name="submit" id="RegistrationButton">Продолжить</button> -->
-                <button type="submit" id="RegistrationButton" name="submit">Продолжить</button>
+                <button type="submit" name="submit" id="myButton">Продолжить</button>
             </form>
         </div>
     </div>
@@ -35,6 +35,11 @@
 <?php
 if (isset($_POST['submit'])) {
     require_once('db.php');
+
+    if (isset($_COOKIE['User'])) {
+        header("Location: login.php");
+    }
+
     $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'test');
 
     if (!$link) {
